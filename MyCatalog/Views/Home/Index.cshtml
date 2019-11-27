@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MyCatalog.Models.Product>
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+@*@section head{
+        <style type="text/css">
+            body {
+                background-image: url('wwwroot/Images/2.jpg');
+                margin: 0;
+            }
+        </style>
+    }*@
+
+<h1 style="color: deepskyblue;">Amazon Catalog</h1>
+<div class="container mt-5" style="margin-top: 8%;">
+
+
+    <div class="card-columns" style="column-count: 3 ;display: inline-block; background-image: url('../images/20.jpg'); margin: 0px 0px 15px 20px; text-align:Center;">
+
+
+
+        @foreach (var item in Model)
+        {
+
+
+
+            var photoPath = "~/Images/" + item.Image;
+
+            <div class="card shadow">
+
+
+
+                <div class="inner" style="overflow:hidden; transition: all 1.5s ease;">
+
+                    <img class="img-fluid" class="card-img-top" style="height:250px" src="@photoPath" asp-append-version="true" />
+
+                </div>
+
+                <div class="card-title">
+
+                    <strong>@Html.ActionLink(item.Name, "Details", new { id = item.Id })</strong>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p style="color: black;">@item.Description</p>
+
+                </div>
+
+                <div class="card-footer">
+                    <a href="@Url.Action("AddToWishList", "WishList", new{ Id=item.Id })" class="btn btn-danger">Add to your wish list</a>
+
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+</div>
+<div class="cold-md-12 clearfix" />
+
+

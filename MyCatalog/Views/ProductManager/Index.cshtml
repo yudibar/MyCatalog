@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MyCatalog.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+
+
+}
+
+<h1 >Amazon Catalog</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            //var photoPath = "/Content/ProductImages/" + item.Image;
+            //string photoPath = "~/Iphone.jfif";
+            @Html.Hidden(item.Id);
+            var photoPath = "~/Images/" + item.Image;
+            <tr>
+                <td>
+                    <img class="img-thumbnail" style="max-width: 80%; height: auto; width: auto\9;" src="@photoPath" asp-append-version="true" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+
+                <td>
+                    @Html.HiddenFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.HiddenFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
